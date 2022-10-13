@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <widget class="QWidget" name="tab_5">
+       <attribute name="title">
+        <string>Aproximaciones</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <item row="0" column="0">
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_2">
+            <property name="text">
+             <string>Tipo de aproximación</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_3">
+            <property name="text">
+             <string>Rango de desnormalización</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_4">
+            <property name="text">
+             <string>Orden mínimo</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QComboBox" name="comboBox">
+            <item>
+             <property name="text">
+              <string>Butterworth</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Chebyshev I</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Chebyshev II</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Cauer</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Legendre</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Gauss</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Bessel</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="filterTypeComboBox">
+            <item>
+             <property name="text">
+              <string>Pasa Bajos</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Pasa Altos</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Pasa Banda</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Rechaza Banda</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Retardo de Grupo</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label">
+            <property name="text">
+             <string>Tipo de Filtro</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QDoubleSpinBox" name="doubleSpinBox"/>
+          </item>
+         </layout>
+        </item>
+        <item row="0" column="1">
+         <layout class="QGridLayout" name="gridLayout_4"/>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab_6">
+       <attribute name="title">
+        <string>División de etapas</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
