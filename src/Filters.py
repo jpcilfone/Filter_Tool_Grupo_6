@@ -3,6 +3,7 @@ import sympy as sp
 from sympy.abc import s,w
 import scipy.signal as ss
 from sympy.functions.special import polynomials as poly
+import matplotlib.pyplot as plt
 
 MIN = 1e-10
 
@@ -33,8 +34,18 @@ class FilterClass:
         self.poles = usefulPoles
 
     def findLPTransferFunction(self):
-        gain = np.cumprod(self.poles)[-1] / np.cumprod(self.zeros)[-1]      #se normaliza la función
+        if(len(self.zeros) == 0):
+            prodZeros = 1
+        else:
+            prodZeros = np.cumprod(self.zeros)[-1]
+
+        gain = np.cumprod(self.poles)[-1] / prodZeros    #se normaliza la función
         self.tfLP = ss.ZerosPolesGain(self.zeros, self.poles, gain)
+
+        wp, m, p = ss.bode(self.tfLP, np.linspace(0, 2, 100))
+
+        plt.plot(wp, 10 ** (m / 20), label='Algún polinomio')
+        plt.show()
 
 class ButterworthApprox(FilterClass):
     def __init__(self, Ap, Aa, Fp, Fa):
@@ -53,9 +64,9 @@ class ButterworthApprox(FilterClass):
         self.setTransferFunctionOrderN(self.n)
 
     def setTransferFunctionOrderN(self, n):
-        self.polinomial = w ** n
+        self.polinomial = sp.Lambda(w, w ** n)
 
-        self.Zw = sp.Lambda(w, 1 / (1 + (self.polinomial * self.xi) ** 2))
+        self.Zw = sp.Lambda(w, 1 / (1 + (self.polinomial(w) * self.xi) ** 2))
         self.Fs = sp.simplify(self.Zw(s / sp.I))
 
         self.findPolesZeros()
@@ -72,15 +83,15 @@ class ChebyshevApproxI(FilterClass):
 
         self.xi = np.sqrt(10 ** (self.Ap / 10) - 1)  # se halla el xi igual que antes
 
-        self.n = int(np.ceil( np.arccosh( (np.sqrt(10 ** (self.Aa / 10) - 1))  / (np.sqrt(10 ** (self.Ap / 10) - 1)))  /
+        self.n = int(np.ceil( np.arccosh( (np.sqrt(10 ** (self.Aa / 10) - 1))  / self.xi)  /
                              (np.arccosh(self.Wa))))
 
         self.setTransferFunctionOrderN(self.n)
 
     def setTransferFunctionOrderN(self, n):
-        self.polinomial = poly.chebyshevt(n, w)
+        self.polinomial = sp.Lambda(w, poly.chebyshevt(n, w))
 
-        self.Zw = sp.Lambda(w, 1 / (1 + (self.polinomial * self.xi) ** 2))
+        self.Zw = sp.Lambda(w, 1 / (1 + (self.polinomial(w) * self.xi) ** 2))
         self.Fs = sp.simplify(self.Zw(s / sp.I))
 
         self.findPolesZeros()
@@ -95,17 +106,17 @@ class ChebyshevApproxII(FilterClass):
         self.Wp = 1
         self.Wa = Fa / Fp
 
-        self.xi = np.sqrt(10 ** (self.Ap / 10) - 1)  # se halla el xi igual que antes
+        self.xi = 1 / np.sqrt(10 ** (self.Aa / 10) - 1)  # se halla el xi igual que antes
 
-        self.n = int(np.ceil( np.arccosh( (np.sqrt(10 ** (self.Aa / 10) - 1))  / (np.sqrt(10 ** (self.Ap / 10) - 1)))  /
+        self.n = int(np.ceil( np.arccosh( 1  / (self.xi * np.sqrt(10 ** (self.Ap / 10) - 1)))  /
                              (np.arccosh(self.Wa))))
 
         self.setTransferFunctionOrderN(self.n)
 
     def setTransferFunctionOrderN(self, n):
-        self.polinomial = poly.chebyshevt(n, w)
+        self.polinomial = sp.Lambda(w, poly.chebyshevt(n, w))
 
-        self.Zw = sp.Lambda(w, 1 / (1 + (self.polinomial * self.xi) ** 2))
+        self.Zw = sp.Lambda(w, (self.polinomial(1/w) * self.xi) ** 2 / (1 + (self.polinomial(1/w) * self.xi) ** 2))
         self.Fs = sp.simplify(self.Zw(s / sp.I))
 
         self.findPolesZeros()
