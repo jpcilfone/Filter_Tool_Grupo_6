@@ -13,8 +13,10 @@ class FilterClass:
         self.Aa = Aa            #ganancia de atenuación en dB (positiva)
 
         self.transferFunction = None    #transferencia final
+
         self.tfLP = None
-        self.tfLP = None
+        self.tfLPFunction = None
+
         self.polinomial = None
         self.Zw = None
         self.Fs = None
@@ -41,6 +43,10 @@ class FilterClass:
 
         gain = np.cumprod(self.poles)[-1] / prodZeros    #se normaliza la función
         self.tfLP = ss.ZerosPolesGain(self.zeros, self.poles, gain)
+
+        self.tfLPFunction = zerosPolesGain2Function(self.zeros, self.poles, gain).expand()
+
+        print(self.tfLPFunction)
 
         wp, m, p = ss.bode(self.tfLP, np.linspace(0, 2, 100))
 
@@ -121,3 +127,17 @@ class ChebyshevApproxII(FilterClass):
 
         self.findPolesZeros()
         self.findLPTransferFunction()
+
+def zerosPolesGain2Function(zeros, poles, gain):
+    res = 1
+
+    for z in zeros:
+        res = res * (s - z)
+        res = res.expand()
+
+    for p in poles:
+        res = res / (s - p)
+
+    res = res * gain
+
+    return res

@@ -3,8 +3,8 @@ from PyQt5.QtWidgets import QMainWindow
 
 # Project modules
 from src.ui.mainwindow import Ui_MainWindow
-from src.Filters import ButterworthApprox,ChebyshevApproxI, ChebyshevApproxII
-
+from src.Filters2 import ButterworthApprox,ChebyshevApproxI, ChebyshevApproxII
+import src.Filters
 
 class MainWindow(QMainWindow, Ui_MainWindow):
 
@@ -12,6 +12,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super(MainWindow, self).__init__()
         self.setupUi(self)
 
-        f = ChebyshevApproxII(1, 20, 1, 1.1)
+
+        #f1 = src.Filters.ChebyshevApproxI(1,20,1,1.1)
+        f = ButterworthApprox(1, 20, 1, 1.1)
 
 
