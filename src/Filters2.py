@@ -89,11 +89,10 @@ class FilterClass:
     '''
     def getBPTransferFunctionBW(self, Fo, dFp, dFa, Ap, Aa, btype):
 
-        Fa = dFa / 2 + np.sqrt((dFa**2 + 4 * Fo**2)) / 2        # Hallo el valor de la frecuencia de atenuación más alta
+        #Fa = dFa / 2 + np.sqrt((dFa**2 + 4 * Fo**2)) / 2        # Hallo el valor de la frecuencia de atenuación más alta
 
         Wp = 1
-        Wa = np.abs((-(2 * np.pi * Fa) ** 2 + (Fo * 2 * np.pi) ** 2) /
-                    (- (dFp * 2 *np.pi) * (2 * np.pi * Fa)))
+        Wa = dFa / dFp
 
         b1 = [1]
         a1 = [1]
@@ -138,13 +137,14 @@ class FilterClass:
 
         if (Fas[1] / Fo < Fo / Fas[0]):
             Fa = Fas[1]
+            dFa = Fa - Fo ** 2 / Fa
 
         else:
             Fa = Fas[0]
+            dFa = Fo ** 2 / Fa - Fa
 
         Wp = 1
-        Wa = np.abs((-(2 * np.pi * Fa) ** 2 + (Fo * 2 * np.pi) ** 2) /
-                    (- (dFp * 2 * np.pi) * (2 * np.pi * Fa)))
+        Wa = dFa / dFp
 
         b1 = [1]
         a1 = [1]
@@ -181,11 +181,10 @@ class FilterClass:
     '''
     def getBSTransferFunctionBW(self, Fo, dFp, dFa, Ap, Aa, btype):
 
-        Fa = dFa / 2 + np.sqrt((dFa ** 2 + 4 * Fo ** 2)) / 2  # Hallo el valor de la frecuencia de atenuación más alta
+        #Fa = dFa / 2 + np.sqrt((dFa ** 2 + 4 * Fo ** 2)) / 2  # Hallo el valor de la frecuencia de atenuación más alta
 
         Wp = 1
-        Wa = np.abs(((dFp * 2 * np.pi) * (2 * np.pi * Fa)) /
-            (-(2 * np.pi * Fa) ** 2 + (Fo * 2 * np.pi) ** 2))
+        Wa = dFp / dFa
 
         b1 = [1]
         a1 = [1]
@@ -226,15 +225,16 @@ class FilterClass:
 
         dFp = Fps[1] - Fps[0]
 
-        if (Fas[1] / Fo < Fo / Fas[0]):
+        if (Fas[1] / Fo > Fo / Fas[0]):
             Fa = Fas[1]
+            dFa = Fa - Fo ** 2 / Fa
 
         else:
             Fa = Fas[0]
+            dFa = Fo ** 2 / Fa - Fa
 
         Wp = 1
-        Wa = np.abs(((dFp * 2 * np.pi) * (2 * np.pi * Fa)) /
-                    (-(2 * np.pi * Fa) ** 2 + (Fo * 2 * np.pi) ** 2))
+        Wa = dFp / dFa
 
         b1 = [1]
         a1 = [1]
