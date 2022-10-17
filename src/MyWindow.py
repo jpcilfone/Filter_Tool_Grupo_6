@@ -20,7 +20,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         Ap = 5
         Aa = 40
         f = FilterClass()
-        tF = f.getBSTransferFunctionFreq(Fp, Fa, Ap, Aa, "ellip")
+        tF = f.getBSTransferFunctionBW(15, 20, 10, Ap, Aa, "ellip")
 
 
         if tipo == "LP":
