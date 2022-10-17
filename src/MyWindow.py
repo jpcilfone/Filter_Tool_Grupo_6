@@ -14,13 +14,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super(MainWindow, self).__init__()
         self.setupUi(self)
 
-        tipo = "HP"
-        Fp = 15
-        Fa = 1
+        tipo = "BS"
+        Fp = [3, 15]
+        Fa = [1, 16]
         Ap = 5
-        Aa = 200
+        Aa = 40
         f = FilterClass()
-        tF = f.getHPTransferFunction(Fp, Fa, Ap, Aa, "ellip")
+        tF = f.getBSTransferFunctionFreq(Fp, Fa, Ap, Aa, "butter")
 
 
         if tipo == "LP":
@@ -38,6 +38,24 @@ class MainWindow(QMainWindow, Ui_MainWindow):
 
             plt.fill([Fp, Fp*10, Fp*10, Fp], [0, 0, -Ap, -Ap], '0.9', lw=0)
             plt.fill([Fa/10, Fa, Fa, Fa/10], [-Aa, -Aa, -Aa*2, -Aa*2], '0.9', lw=0)
+
+        elif tipo == "BP":
+            w = np.logspace(np.log10(Fa[0] * 2 * np.pi / 10), np.log10(Fa[1] * 2 * np.pi * 10), 1000)
+            w, m, p = ss.bode(tF, w, n=1000)
+            plt.semilogx(w / (2 * np.pi), m)
+
+            plt.fill([Fp[0], Fp[1], Fp[1], Fp[0]], [0, 0, -Ap, -Ap], '0.9', lw=0)
+            plt.fill([Fa[0]/10, Fa[0], Fa[0], Fa[0]/10], [-Aa, -Aa, -Aa*2, -Aa*2], '0.9', lw=0)
+            plt.fill([Fa[1], Fa[1]*10, Fa[1]*10, Fa[1]], [-Aa, -Aa, -Aa * 2, -Aa * 2], '0.9', lw=0)
+
+        elif tipo == "BS":
+            w = np.logspace(np.log10(Fa[0] * 2 * np.pi / 10), np.log10(Fa[1] * 2 * np.pi * 10), 1000)
+            w, m, p = ss.bode(tF, w, n=1000)
+            plt.semilogx(w / (2 * np.pi), m)
+
+            plt.fill([Fp[0], Fp[1], Fp[1], Fp[0]], [0, 0, -Ap, -Ap], '0.9', lw=0)
+            plt.fill([Fa[0]/10, Fa[0], Fa[0], Fa[0]/10], [-Aa, -Aa, -Aa*2, -Aa*2], '0.9', lw=0)
+            plt.fill([Fa[1], Fa[1]*10, Fa[1]*10, Fa[1]], [-Aa, -Aa, -Aa * 2, -Aa * 2], '0.9', lw=0)
 
         plt.show()
 

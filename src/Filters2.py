@@ -134,11 +134,13 @@ class FilterClass:
 
         dFp = Fps[1] - Fps[0]
 
+        Fa = 1
+
         if (Fas[1] / Fo < Fo / Fas[0]):
             Fa = Fas[1]
 
         else:
-            Fa = 2*Fo - Fas[0]
+            Fa = Fas[0]
 
         Wp = 1
         Wa = np.abs((-(2 * np.pi * Fa) ** 2 + (Fo * 2 * np.pi) ** 2) /
@@ -168,7 +170,7 @@ class FilterClass:
             b1, a1 = ss.ellip(N, Ap, Aa, Wn, 'lowpass', analog=True)
 
 
-        b, a = ss.lp2bp(b1, a1, Fo * 2 * np.pi, dFp * 2 *np.pi)
+        b, a = ss.lp2bp(b1, a1, Fo * 2 * np.pi, dFp * 2 * np.pi)
 
         self.transferFunction = ss.TransferFunction(b, a)
 
@@ -228,7 +230,7 @@ class FilterClass:
             Fa = Fas[1]
 
         else:
-            Fa = 2 * Fo - Fas[0]
+            Fa = Fas[0]
 
         Wp = 1
         Wa = np.abs(((dFp * 2 * np.pi) * (2 * np.pi * Fa)) /
