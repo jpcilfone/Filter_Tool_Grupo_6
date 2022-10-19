@@ -14,13 +14,13 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super(MainWindow, self).__init__()
         self.setupUi(self)
 
-        tipo = "BS"
-        Fa = [5, 10]
-        Fp = [3, 15]
+        tipo = "HP"
+        Fp = 10
+        Fa = 3
         Ap = 5
-        Aa = 40
+        Aa = 80
         f = FilterClass()
-        tF = f.getBSTransferFunctionFreq(Fp, Fa, Ap, Aa, "ellip")
+        tF = f.getHPTransferFunction(Fp, Fa, Ap, Aa, "ellip", 1)
 
 
         if tipo == "LP":
