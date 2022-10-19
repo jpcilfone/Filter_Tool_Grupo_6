@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>809</width>
-    <height>718</height>
+    <width>949</width>
+    <height>777</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -219,6 +219,9 @@
               </property>
              </widget>
             </item>
+            <item row="0" column="2">
+             <widget class="QListWidget" name="listPlantillaLPWidget"/>
+            </item>
            </layout>
           </widget>
           <widget class="QWidget" name="pasaAltosTab">
@@ -226,19 +229,6 @@
             <string>Pasa Altos</string>
            </attribute>
            <layout class="QGridLayout" name="gridLayout_9">
-            <item row="0" column="1">
-             <widget class="QGroupBox" name="pasaAltosPlot">
-              <property name="minimumSize">
-               <size>
-                <width>500</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="title">
-               <string/>
-              </property>
-             </widget>
-            </item>
             <item row="0" column="0">
              <layout class="QGridLayout" name="gridLayout_6">
               <item row="2" column="0">
@@ -406,6 +396,22 @@
                <widget class="QPlainTextEdit" name="ordenHP"/>
               </item>
              </layout>
+            </item>
+            <item row="0" column="1">
+             <widget class="QGroupBox" name="pasaAltosPlot">
+              <property name="minimumSize">
+               <size>
+                <width>500</width>
+                <height>0</height>
+               </size>
+              </property>
+              <property name="title">
+               <string/>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="2">
+             <widget class="QListWidget" name="listPlantillaHPWidget"/>
             </item>
            </layout>
           </widget>
@@ -634,6 +640,9 @@
               </item>
              </layout>
             </item>
+            <item row="0" column="2">
+             <widget class="QListWidget" name="listPlantillaBPWidget"/>
+            </item>
            </layout>
           </widget>
           <widget class="QWidget" name="rechazaBandaTab">
@@ -861,6 +870,9 @@
               </property>
              </widget>
             </item>
+            <item row="0" column="2">
+             <widget class="QListWidget" name="listPlantillaBSWidget"/>
+            </item>
            </layout>
           </widget>
          </widget>
@@ -874,6 +886,9 @@
       </widget>
      </widget>
     </item>
+    <item row="0" column="1">
+     <widget class="QListWidget" name="listFiltrosWidget"/>
+    </item>
    </layout>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -882,7 +897,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>809</width>
+     <width>949</width>
      <height>21</height>
     </rect>
    </property>
