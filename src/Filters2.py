@@ -33,6 +33,7 @@ class FilterClass:
     def getLPTransferFunction(self, Fp, Fa, Ap, Aa, btype):
 
         self.filterType = "LP"
+        self.filterName = btype
 
         Wp = 1
         Wa = Fa / Fp
@@ -43,32 +44,8 @@ class FilterClass:
         self.Aa = Aa
         self.Fp = Fp
 
-        b1 = [1]
-        a1 = [1]
-
-        if (btype == "butter"):
-            self.filterName = "butter"
-            N, Wn = ss.buttord(Wp, Wa, Ap, Aa, True)
-            self.n = N
-            b1, a1 = ss.butter(N, Wn, 'lowpass', analog = True)
-
-        elif (btype == "cheby1"):
-            self.filterName = "cheby1"
-            N, Wn = ss.cheb1ord(Wp, Wa, Ap, Aa, True)
-            self.n = N
-            b1, a1 = ss.cheby1(N, Ap, Wn, 'lowpass', analog = True)
-
-        elif (btype == "cheby2"):
-            self.filterName = "cheby2"
-            N, Wn = ss.cheb2ord(Wp, Wa, Ap, Aa, True)
-            self.n = N
-            b1, a1 = ss.cheby2(N, Aa, Wn, 'lowpass', analog = True)
-
-        elif (btype == "ellip"):
-            self.filterName = "ellip"
-            N, Wn = ss.ellipord(Wp, Wa, Ap, Aa, True)
-            self.n = N
-            b1, a1 = ss.ellip(N, Ap, Aa, Wn, 'lowpass', analog=True)
+        b1, a1, N = self.findLowPassNormalizedFilter(Wp, Wa, Ap, Aa, btype)
+        self.n = N
 
         b, a = ss.lp2lp(b1, a1, Fp * 2 * np.pi)
         self.transferFunction = ss.TransferFunction(b,a)
@@ -80,6 +57,7 @@ class FilterClass:
     '''
     def getHPTransferFunction(self, Fp, Fa, Ap, Aa, btype):
         self.filterType = "HP"
+        self.filterName = btype
         Wp = 1
         Wa = 2 * np.pi * Fp / (Fa * 2 * np.pi)
 
@@ -89,33 +67,8 @@ class FilterClass:
         self.Aa = Aa
         self.Fp = Fp
 
-        b1 = [1]
-        a1 = [1]
-
-        if (btype == "butter"):
-            self.filterName = "butter"
-            N, Wn = ss.buttord(Wp, Wa, Ap, Aa, True)
-            self.n = N
-            b1, a1 = ss.butter(N, Wn, 'lowpass', analog=True)
-
-        elif (btype == "cheby1"):
-            self.filterName = "cheby1"
-            N, Wn = ss.cheb1ord(Wp, Wa, Ap, Aa, True)
-            self.n = N
-            b1, a1 = ss.cheby1(N, Ap, Wn, 'lowpass', analog=True)
-
-        elif (btype == "cheby2"):
-            self.filterName = "cheby2"
-            N, Wn = ss.cheb2ord(Wp, Wa, Ap, Aa, True)
-            self.n = N
-            b1, a1 = ss.cheby2(N, Aa, Wn, 'lowpass', analog=True)
-
-        elif (btype == "ellip"):
-            self.filterName = "ellip"
-            N, Wn = ss.ellipord(Wp, Wa, Ap, Aa, True)
-            self.n = N
-            b1, a1 = ss.ellip(N, Ap, Aa, Wn, 'lowpass', analog=True)
-
+        b1, a1, N = self.findLowPassNormalizedFilter(Wp, Wa, Ap, Aa, btype)
+        self.n = N
 
         b, a = ss.lp2hp(b1,a1, Fp * 2 * np.pi)
 
@@ -128,6 +81,7 @@ class FilterClass:
     '''
     def getBPTransferFunctionBW(self, Fo, dFp, dFa, Ap, Aa, btype):
         self.filterType = "BP"
+        self.filterName = btype
 
         #Fa = dFa / 2 + np.sqrt((dFa**2 + 4 * Fo**2)) / 2        # Hallo el valor de la frecuencia de atenuación más alta
 
@@ -142,32 +96,8 @@ class FilterClass:
         self.Fo = Fo
         self.dFp = dFp
 
-        b1 = [1]
-        a1 = [1]
-
-        if (btype == "butter"):
-            self.filterName = "butter"
-            N, Wn = ss.buttord(Wp, Wa, Ap, Aa, True)
-            self.n = N
-            b1, a1 = ss.butter(N, Wn, 'lowpass', analog=True)
-
-        elif (btype == "cheby1"):
-            self.filterName = "cheby1"
-            N, Wn = ss.cheb1ord(Wp, Wa, Ap, Aa, True)
-            self.n = N
-            b1, a1 = ss.cheby1(N, Ap, Wn, 'lowpass', analog=True)
-
-        elif (btype == "cheby2"):
-            self.filterName = "cheby2"
-            N, Wn = ss.cheb2ord(Wp, Wa, Ap, Aa, True)
-            self.n = N
-            b1, a1 = ss.cheby2(N, Aa, Wn, 'lowpass', analog=True)
-
-        elif (btype == "ellip"):
-            self.filterName = "ellip"
-            N, Wn = ss.ellipord(Wp, Wa, Ap, Aa, True)
-            self.n = N
-            b1, a1 = ss.ellip(N, Ap, Aa, Wn, 'lowpass', analog=True)
+        b1, a1, N = self.findLowPassNormalizedFilter(Wp, Wa, Ap, Aa, btype)
+        self.n = N
 
         b, a = ss.lp2bp(b1, a1, Fo * 2 * np.pi, dFp * 2 *np.pi)
 
@@ -180,6 +110,7 @@ class FilterClass:
     '''
     def getBPTransferFunctionFreq(self, Fps, Fas, Ap, Aa, btype):
         self.filterType = "BP"
+        self.filterName = btype
 
         Fo = np.sqrt(Fps[0]*Fps[1])
         Fp = Fps[1]
@@ -208,32 +139,8 @@ class FilterClass:
         self.Fo = Fo
         self.dFp = dFp
 
-        b1 = [1]
-        a1 = [1]
-
-        if (btype == "butter"):
-            self.filterName = "butter"
-            N, Wn = ss.buttord(Wp, Wa, Ap, Aa, True)
-            self.n = N
-            b1, a1 = ss.butter(N, Wn, 'lowpass', analog=True)
-
-        elif (btype == "cheby1"):
-            self.filterName = "cheby1"
-            N, Wn = ss.cheb1ord(Wp, Wa, Ap, Aa, True)
-            self.n = N
-            b1, a1 = ss.cheby1(N, Ap, Wn, 'lowpass', analog=True)
-
-        elif (btype == "cheby2"):
-            self.filterName = "cheby2"
-            N, Wn = ss.cheb2ord(Wp, Wa, Ap, Aa, True)
-            self.n = N
-            b1, a1 = ss.cheby2(N, Aa, Wn, 'lowpass', analog=True)
-
-        elif (btype == "ellip"):
-            self.filterName = "ellip"
-            N, Wn = ss.ellipord(Wp, Wa, Ap, Aa, True)
-            self.n = N
-            b1, a1 = ss.ellip(N, Ap, Aa, Wn, 'lowpass', analog=True)
+        b1, a1, N = self.findLowPassNormalizedFilter(Wp, Wa, Ap, Aa, btype)
+        self.n = N
 
 
         b, a = ss.lp2bp(b1, a1, Fo * 2 * np.pi, dFp * 2 * np.pi)
@@ -247,6 +154,7 @@ class FilterClass:
     '''
     def getBSTransferFunctionBW(self, Fo, dFp, dFa, Ap, Aa, btype):
         self.filterType = "BS"
+        self.filterName = btype
         #Fa = dFa / 2 + np.sqrt((dFa ** 2 + 4 * Fo ** 2)) / 2  # Hallo el valor de la frecuencia de atenuación más alta
 
         Wp = 1
@@ -260,32 +168,8 @@ class FilterClass:
         self.Fo = Fo
         self.dFp = dFp
 
-        b1 = [1]
-        a1 = [1]
-
-        if (btype == "butter"):
-            self.filterName = "butter"
-            N, Wn = ss.buttord(Wp, Wa, Ap, Aa, True)
-            self.n = N
-            b1, a1 = ss.butter(N, Wn, 'lowpass', analog=True)
-
-        elif (btype == "cheby1"):
-            self.filterName = "cheby1"
-            N, Wn = ss.cheb1ord(Wp, Wa, Ap, Aa, True)
-            self.n = N
-            b1, a1 = ss.cheby1(N, Ap, Wn, 'lowpass', analog=True)
-
-        elif (btype == "cheby2"):
-            self.filterName = "cheby2"
-            N, Wn = ss.cheb2ord(Wp, Wa, Ap, Aa, True)
-            self.n = N
-            b1, a1 = ss.cheby2(N, Aa, Wn, 'lowpass', analog=True)
-
-        elif (btype == "ellip"):
-            self.filterName = "ellip"
-            N, Wn = ss.ellipord(Wp, Wa, Ap, Aa, True)
-            self.n = N
-            b1, a1 = ss.ellip(N, Ap, Aa, Wn, 'lowpass', analog=True)
+        b1, a1, N = self.findLowPassNormalizedFilter(Wp, Wa, Ap, Aa, btype)
+        self.n = N
 
         b, a = ss.lp2bs(b1, a1, Fo * 2 * np.pi, dFp * 2 * np.pi)
 
@@ -298,6 +182,7 @@ class FilterClass:
     '''
     def getBSTransferFunctionFreq(self, Fps, Fas, Ap, Aa, btype):
         self.filterType = "BS"
+        self.filterName = btype
 
         Fo = np.sqrt(Fps[0] * Fps[1])
         Fp = Fps[1]
@@ -323,32 +208,8 @@ class FilterClass:
         self.Fo = Fo
         self.dFp = dFp
 
-        b1 = [1]
-        a1 = [1]
-
-        if (btype == "butter"):
-            self.filterName = "butter"
-            N, Wn = ss.buttord(Wp, Wa, Ap, Aa, True)
-            self.n = N
-            b1, a1 = ss.butter(N, Wn, 'lowpass', analog=True)
-
-        elif (btype == "cheby1"):
-            self.filterName = "cheby1"
-            N, Wn = ss.cheb1ord(Wp, Wa, Ap, Aa, True)
-            self.n = N
-            b1, a1 = ss.cheby1(N, Ap, Wn, 'lowpass', analog=True)
-
-        elif (btype == "cheby2"):
-            self.filterName = "cheby2"
-            N, Wn = ss.cheb2ord(Wp, Wa, Ap, Aa, True)
-            self.n = N
-            b1, a1 = ss.cheby2(N, Aa, Wn, 'lowpass', analog=True)
-
-        elif (btype == "ellip"):
-            self.filterName = "ellip"
-            N, Wn = ss.ellipord(Wp, Wa, Ap, Aa, True)
-            self.n = N
-            b1, a1 = ss.ellip(N, Ap, Aa, Wn, 'lowpass', analog=True)
+        b1, a1, N = self.findLowPassNormalizedFilter(Wp, Wa, Ap, Aa, btype)
+        self.n = N
 
         b, a = ss.lp2bs(b1, a1, Fo * 2 * np.pi, dFp * 2 * np.pi)
 
@@ -427,6 +288,35 @@ class FilterClass:
 
 
         return self.transferFunction
+
+    def findLowPassNormalizedFilter(self, Wp, Wa, Ap, Aa, btype):
+        b1 = [1]
+        a1 = [1]
+
+        if (btype == "butter"):
+            N, Wn = ss.buttord(Wp, Wa, Ap, Aa, True)
+            b1, a1 = ss.butter(N, Wn, 'lowpass', analog = True)
+
+        elif (btype == "cheby1"):
+            N, Wn = ss.cheb1ord(Wp, Wa, Ap, Aa, True)
+            b1, a1 = ss.cheby1(N, Ap, Wn, 'lowpass', analog = True)
+
+        elif (btype == "cheby2"):
+            N, Wn = ss.cheb2ord(Wp, Wa, Ap, Aa, True)
+            b1, a1 = ss.cheby2(N, Aa, Wn, 'lowpass', analog = True)
+
+        elif (btype == "ellip"):
+            N, Wn = ss.ellipord(Wp, Wa, Ap, Aa, True)
+            b1, a1 = ss.ellip(N, Ap, Aa, Wn, 'lowpass', analog=True)
+
+        return b1, a1, N
+
+
+    '''
+        Aplicar el rango de desnormalización.
+    '''
+    def aplicarRangoDesnormalización(self, rango):
+        return
 
 
 
