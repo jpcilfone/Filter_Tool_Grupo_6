@@ -14,6 +14,8 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         super(MainWindow, self).__init__()
         self.setupUi(self)
 
+        self.listaFiltros = []
+
         tipo = "HP"
         Fp = 10
         Fa = 3
