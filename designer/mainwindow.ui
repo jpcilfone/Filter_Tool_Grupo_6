@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>949</width>
-    <height>777</height>
+    <width>1150</width>
+    <height>739</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,189 +25,646 @@
         <string>Aproximaciones</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
-        <item row="1" column="1">
-         <layout class="QGridLayout" name="gridLayout_4"/>
+        <item row="0" column="0" rowspan="2">
+         <widget class="QGroupBox" name="groupBox_2">
+          <property name="maximumSize">
+           <size>
+            <width>300</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_5">
+           <item row="0" column="0">
+            <layout class="QGridLayout" name="gridLayout_2">
+             <item row="0" column="0">
+              <widget class="QLabel" name="label">
+               <property name="text">
+                <string>Tipo de Filtro</string>
+               </property>
+              </widget>
+             </item>
+             <item row="6" column="0" colspan="2">
+              <widget class="QPushButton" name="pushButton">
+               <property name="text">
+                <string>Crear Plantilla</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QComboBox" name="comboBox_7">
+               <item>
+                <property name="text">
+                 <string>Pasa Bajos</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Pasa Altos</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Pasa Banda</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Rechaza Banda</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="1" column="0" colspan="2">
+              <widget class="QStackedWidget" name="stackedWidget_2">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>250</height>
+                </size>
+               </property>
+               <property name="currentIndex">
+                <number>3</number>
+               </property>
+               <widget class="QWidget" name="page_3">
+                <layout class="QGridLayout" name="gridLayout_16">
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_53">
+                   <property name="maximumSize">
+                    <size>
+                     <width>100</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>Fp</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QPlainTextEdit" name="fpLP">
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>50</height>
+                    </size>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_27">
+                   <property name="maximumSize">
+                    <size>
+                     <width>100</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>Fa</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QPlainTextEdit" name="faLP">
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>50</height>
+                    </size>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+               <widget class="QWidget" name="page_4">
+                <layout class="QGridLayout" name="gridLayout_17">
+                 <item row="0" column="0">
+                  <widget class="QLabel" name="label_55">
+                   <property name="maximumSize">
+                    <size>
+                     <width>100</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>Fp</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="0" column="1">
+                  <widget class="QPlainTextEdit" name="fpHP">
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>50</height>
+                    </size>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="0">
+                  <widget class="QLabel" name="label_54">
+                   <property name="maximumSize">
+                    <size>
+                     <width>100</width>
+                     <height>16777215</height>
+                    </size>
+                   </property>
+                   <property name="text">
+                    <string>Fa</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="1" column="1">
+                  <widget class="QPlainTextEdit" name="faHP">
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>50</height>
+                    </size>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+               <widget class="QWidget" name="page_7">
+                <layout class="QGridLayout" name="gridLayout_18">
+                 <item row="0" column="0" colspan="2">
+                  <widget class="QComboBox" name="comboBox_8">
+                   <item>
+                    <property name="text">
+                     <string>Anchos de Banda</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>Frecuencias</string>
+                    </property>
+                   </item>
+                  </widget>
+                 </item>
+                 <item row="1" column="0" colspan="2">
+                  <widget class="QStackedWidget" name="stackedWidget_4">
+                   <property name="currentIndex">
+                    <number>1</number>
+                   </property>
+                   <widget class="QWidget" name="page_8">
+                    <layout class="QGridLayout" name="gridLayout_19">
+                     <item row="0" column="0">
+                      <widget class="QLabel" name="label_63">
+                       <property name="text">
+                        <string>Fo</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="0" column="1">
+                      <widget class="QPlainTextEdit" name="f0BP">
+                       <property name="maximumSize">
+                        <size>
+                         <width>16777215</width>
+                         <height>50</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="0">
+                      <widget class="QLabel" name="label_62">
+                       <property name="text">
+                        <string>ΔFp</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="1">
+                      <widget class="QPlainTextEdit" name="dFpBP">
+                       <property name="maximumSize">
+                        <size>
+                         <width>16777215</width>
+                         <height>50</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="2" column="0">
+                      <widget class="QLabel" name="label_61">
+                       <property name="text">
+                        <string>ΔFa</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="2" column="1">
+                      <widget class="QPlainTextEdit" name="dFaBP">
+                       <property name="maximumSize">
+                        <size>
+                         <width>16777215</width>
+                         <height>50</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                   <widget class="QWidget" name="page_9">
+                    <layout class="QGridLayout" name="gridLayout_20">
+                     <item row="0" column="0">
+                      <widget class="QLabel" name="label_58">
+                       <property name="text">
+                        <string>Fp-</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="0" column="1">
+                      <widget class="QPlainTextEdit" name="fpXBP">
+                       <property name="maximumSize">
+                        <size>
+                         <width>16777215</width>
+                         <height>50</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="0">
+                      <widget class="QLabel" name="label_60">
+                       <property name="text">
+                        <string>Fp+</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="1">
+                      <widget class="QPlainTextEdit" name="fpYBP">
+                       <property name="maximumSize">
+                        <size>
+                         <width>16777215</width>
+                         <height>50</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="2" column="0">
+                      <widget class="QLabel" name="label_64">
+                       <property name="text">
+                        <string>Fa-</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="2" column="1">
+                      <widget class="QPlainTextEdit" name="faXBP">
+                       <property name="maximumSize">
+                        <size>
+                         <width>16777215</width>
+                         <height>50</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="3" column="0">
+                      <widget class="QLabel" name="label_59">
+                       <property name="text">
+                        <string>Fa+</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="3" column="1">
+                      <widget class="QPlainTextEdit" name="faYBP">
+                       <property name="maximumSize">
+                        <size>
+                         <width>16777215</width>
+                         <height>50</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+               <widget class="QWidget" name="page_10">
+                <layout class="QFormLayout" name="formLayout">
+                 <item row="0" column="0" colspan="2">
+                  <widget class="QComboBox" name="comboBox_9">
+                   <item>
+                    <property name="text">
+                     <string>Anchos de Banda</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>Frecuencias</string>
+                    </property>
+                   </item>
+                  </widget>
+                 </item>
+                 <item row="1" column="0" colspan="2">
+                  <widget class="QStackedWidget" name="stackedWidget_5">
+                   <property name="currentIndex">
+                    <number>1</number>
+                   </property>
+                   <widget class="QWidget" name="page_11">
+                    <layout class="QGridLayout" name="gridLayout_21">
+                     <item row="0" column="0">
+                      <widget class="QLabel" name="label_67">
+                       <property name="text">
+                        <string>Fo</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="0" column="1">
+                      <widget class="QPlainTextEdit" name="f0BS">
+                       <property name="maximumSize">
+                        <size>
+                         <width>16777215</width>
+                         <height>50</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="0">
+                      <widget class="QLabel" name="label_66">
+                       <property name="text">
+                        <string>ΔFp</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="1">
+                      <widget class="QPlainTextEdit" name="dFpBS">
+                       <property name="maximumSize">
+                        <size>
+                         <width>16777215</width>
+                         <height>50</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="2" column="0">
+                      <widget class="QLabel" name="label_65">
+                       <property name="text">
+                        <string>ΔFa</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="2" column="1">
+                      <widget class="QPlainTextEdit" name="dFaBS">
+                       <property name="maximumSize">
+                        <size>
+                         <width>16777215</width>
+                         <height>50</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                   <widget class="QWidget" name="page_12">
+                    <layout class="QGridLayout" name="gridLayout_22">
+                     <item row="0" column="0">
+                      <widget class="QLabel" name="label_69">
+                       <property name="text">
+                        <string>Fp-</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="0" column="1">
+                      <widget class="QPlainTextEdit" name="fpXBS">
+                       <property name="maximumSize">
+                        <size>
+                         <width>16777215</width>
+                         <height>50</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="0">
+                      <widget class="QLabel" name="label_71">
+                       <property name="text">
+                        <string>Fp+</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="1" column="1">
+                      <widget class="QPlainTextEdit" name="fpYBS">
+                       <property name="maximumSize">
+                        <size>
+                         <width>16777215</width>
+                         <height>50</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="2" column="0">
+                      <widget class="QLabel" name="label_70">
+                       <property name="text">
+                        <string>Fa-</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="2" column="1">
+                      <widget class="QPlainTextEdit" name="faXBS">
+                       <property name="maximumSize">
+                        <size>
+                         <width>16777215</width>
+                         <height>50</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="3" column="0">
+                      <widget class="QLabel" name="label_68">
+                       <property name="text">
+                        <string>Fa+</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item row="3" column="1">
+                      <widget class="QPlainTextEdit" name="faYBS">
+                       <property name="maximumSize">
+                        <size>
+                         <width>16777215</width>
+                         <height>50</height>
+                        </size>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </widget>
+             </item>
+             <item row="2" column="0" rowspan="2">
+              <widget class="QLabel" name="label_73">
+               <property name="maximumSize">
+                <size>
+                 <width>100</width>
+                 <height>50</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Ap</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="0" rowspan="2">
+              <widget class="QLabel" name="label_72">
+               <property name="maximumSize">
+                <size>
+                 <width>100</width>
+                 <height>50</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Aa</string>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="1">
+              <widget class="QTextBrowser" name="ordenLP">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>50</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="12" column="0">
+              <widget class="QLabel" name="label_8">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>50</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Rango de desnormalización</string>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="1" rowspan="2">
+              <widget class="QComboBox" name="comboBox">
+               <item>
+                <property name="text">
+                 <string>Butterworth</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Chebyshev I</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Chebyshev II (inverso)</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>Cauer (elíptico)</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="12" column="1">
+              <widget class="QPlainTextEdit" name="rangoLP">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>50</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="7" column="0" rowspan="2">
+              <widget class="QLabel" name="label_6">
+               <property name="text">
+                <string>Tipo de filtro</string>
+               </property>
+              </widget>
+             </item>
+             <item row="11" column="0">
+              <widget class="QLabel" name="label_7">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>50</height>
+                </size>
+               </property>
+               <property name="text">
+                <string>Cambiar Orden</string>
+               </property>
+              </widget>
+             </item>
+             <item row="10" column="0" colspan="2">
+              <widget class="QPushButton" name="pushButton_5">
+               <property name="text">
+                <string>Crear Filtro</string>
+               </property>
+              </widget>
+             </item>
+             <item row="13" column="0" colspan="2">
+              <widget class="QPushButton" name="pushButton_2">
+               <property name="text">
+                <string>Aplicar cambios</string>
+               </property>
+              </widget>
+             </item>
+             <item row="4" column="1" rowspan="2">
+              <widget class="QPlainTextEdit" name="aaVal">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>50</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1" rowspan="2">
+              <widget class="QPlainTextEdit" name="apVal">
+               <property name="maximumSize">
+                <size>
+                 <width>16777215</width>
+                 <height>50</height>
+                </size>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </item>
+          </layout>
+         </widget>
         </item>
-        <item row="0" column="0">
+        <item row="1" column="2">
+         <widget class="QListWidget" name="listFiltrosWidget">
+          <property name="maximumSize">
+           <size>
+            <width>150</width>
+            <height>16777215</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QListWidget" name="listPlantillasWidget">
+          <property name="maximumSize">
+           <size>
+            <width>150</width>
+            <height>16777215</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1" rowspan="2">
          <widget class="QTabWidget" name="tabWidget_2">
           <property name="currentIndex">
            <number>0</number>
           </property>
-          <widget class="QWidget" name="pasabajosTab">
+          <widget class="QWidget" name="tab">
            <attribute name="title">
-            <string>Pasa Bajos</string>
+            <string>Curvas de atenuación</string>
            </attribute>
-           <layout class="QGridLayout" name="gridLayout_5">
+           <layout class="QGridLayout" name="gridLayout_4">
             <item row="0" column="0">
-             <layout class="QGridLayout" name="gridLayout_2">
-              <item row="0" column="0">
-               <widget class="QLabel" name="label">
-                <property name="text">
-                 <string>Crear Plantilla</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="label_3">
-                <property name="maximumSize">
-                 <size>
-                  <width>100</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Fa</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="label_2">
-                <property name="maximumSize">
-                 <size>
-                  <width>100</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Fp</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="0">
-               <widget class="QLabel" name="label_4">
-                <property name="maximumSize">
-                 <size>
-                  <width>100</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Ap</string>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="0">
-               <widget class="QLabel" name="label_5">
-                <property name="maximumSize">
-                 <size>
-                  <width>100</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Aa</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QPlainTextEdit" name="fpLP">
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>50</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="1">
-               <widget class="QPlainTextEdit" name="faLP">
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>50</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="1">
-               <widget class="QPlainTextEdit" name="apLP">
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>50</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="1">
-               <widget class="QPlainTextEdit" name="aaLp">
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>50</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-              <item row="6" column="0">
-               <widget class="QLabel" name="label_6">
-                <property name="text">
-                 <string>Tipo de filtro</string>
-                </property>
-               </widget>
-              </item>
-              <item row="7" column="0">
-               <widget class="QLabel" name="label_8">
-                <property name="text">
-                 <string>Rango</string>
-                </property>
-               </widget>
-              </item>
-              <item row="5" column="0" colspan="2">
-               <widget class="QPushButton" name="pushButton">
-                <property name="text">
-                 <string>Crear Plantilla</string>
-                </property>
-               </widget>
-              </item>
-              <item row="6" column="1">
-               <widget class="QComboBox" name="comboBox">
-                <item>
-                 <property name="text">
-                  <string>Butterworth</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Chebyshev I</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Chebyshev II (inverso)</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Cauer (elíptico)</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item row="8" column="0">
-               <widget class="QLabel" name="label_7">
-                <property name="text">
-                 <string>Orden</string>
-                </property>
-               </widget>
-              </item>
-              <item row="8" column="1">
-               <widget class="QTextBrowser" name="ordenLP"/>
-              </item>
-              <item row="7" column="1">
-               <widget class="QPlainTextEdit" name="rangoLP"/>
-              </item>
-              <item row="9" column="0" colspan="2">
-               <widget class="QPushButton" name="pushButton_5">
-                <property name="text">
-                 <string>Crear Filtro</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item row="0" column="1">
-             <widget class="QGroupBox" name="pasaBajosPlot">
+             <widget class="QGroupBox" name="atenMagPlot">
               <property name="minimumSize">
                <size>
                 <width>500</width>
@@ -219,659 +676,47 @@
               </property>
              </widget>
             </item>
-            <item row="0" column="2">
-             <widget class="QListWidget" name="listPlantillaLPWidget"/>
+            <item row="1" column="0">
+             <widget class="QGroupBox" name="atenFasePlot">
+              <property name="title">
+               <string/>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="pasaAltosTab">
+          <widget class="QWidget" name="tab_2">
            <attribute name="title">
-            <string>Pasa Altos</string>
+            <string>Curvas de ganancia</string>
            </attribute>
-           <layout class="QGridLayout" name="gridLayout_9">
+           <layout class="QGridLayout" name="gridLayout_6">
             <item row="0" column="0">
-             <layout class="QGridLayout" name="gridLayout_6">
-              <item row="2" column="0">
-               <widget class="QLabel" name="label_10">
-                <property name="maximumSize">
-                 <size>
-                  <width>100</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Fa</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0">
-               <widget class="QLabel" name="label_11">
-                <property name="maximumSize">
-                 <size>
-                  <width>100</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Fp</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="label_9">
-                <property name="text">
-                 <string>Crear Plantilla</string>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="0">
-               <widget class="QLabel" name="label_12">
-                <property name="maximumSize">
-                 <size>
-                  <width>100</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Ap</string>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="0">
-               <widget class="QLabel" name="label_13">
-                <property name="maximumSize">
-                 <size>
-                  <width>100</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-                <property name="text">
-                 <string>Aa</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="1">
-               <widget class="QPlainTextEdit" name="fpHP">
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="1">
-               <widget class="QPlainTextEdit" name="faHP">
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-              <item row="3" column="1">
-               <widget class="QPlainTextEdit" name="apHP">
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-              <item row="4" column="1">
-               <widget class="QPlainTextEdit" name="aaHP">
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>16777215</height>
-                 </size>
-                </property>
-               </widget>
-              </item>
-              <item row="5" column="0" colspan="2">
-               <widget class="QPushButton" name="pushButton_2">
-                <property name="text">
-                 <string>Crear Plantilla</string>
-                </property>
-               </widget>
-              </item>
-              <item row="6" column="1">
-               <widget class="QComboBox" name="comboBox_2">
-                <item>
-                 <property name="text">
-                  <string>Butterworth</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Chebyshev I</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Chebyshev II (inverso)</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Cauer (elíptico)</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item row="6" column="0">
-               <widget class="QLabel" name="label_16">
-                <property name="text">
-                 <string>Tipo de filtro</string>
-                </property>
-               </widget>
-              </item>
-              <item row="7" column="0">
-               <widget class="QLabel" name="label_14">
-                <property name="text">
-                 <string>Rango</string>
-                </property>
-               </widget>
-              </item>
-              <item row="9" column="0" colspan="2">
-               <widget class="QPushButton" name="pushButton_6">
-                <property name="text">
-                 <string>Crear Filtro</string>
-                </property>
-               </widget>
-              </item>
-              <item row="8" column="0">
-               <widget class="QLabel" name="label_15">
-                <property name="text">
-                 <string>Orden</string>
-                </property>
-               </widget>
-              </item>
-              <item row="7" column="1">
-               <widget class="QPlainTextEdit" name="rangoHP"/>
-              </item>
-              <item row="8" column="1">
-               <widget class="QPlainTextEdit" name="ordenHP"/>
-              </item>
-             </layout>
-            </item>
-            <item row="0" column="1">
-             <widget class="QGroupBox" name="pasaAltosPlot">
-              <property name="minimumSize">
-               <size>
-                <width>500</width>
-                <height>0</height>
-               </size>
-              </property>
+             <widget class="QGroupBox" name="ganMagPlot">
               <property name="title">
                <string/>
               </property>
              </widget>
             </item>
-            <item row="0" column="2">
-             <widget class="QListWidget" name="listPlantillaHPWidget"/>
+            <item row="1" column="0">
+             <widget class="QGroupBox" name="ganFasePlot">
+              <property name="title">
+               <string/>
+              </property>
+             </widget>
             </item>
            </layout>
           </widget>
-          <widget class="QWidget" name="pasaBandaTab">
+          <widget class="QWidget" name="tab_3">
            <attribute name="title">
-            <string>Pasa Banda</string>
+            <string>Polos y ceros</string>
            </attribute>
-           <layout class="QGridLayout" name="gridLayout_10">
-            <item row="0" column="1">
-             <widget class="QGroupBox" name="pasaBandaPlot">
-              <property name="minimumSize">
-               <size>
-                <width>500</width>
-                <height>0</height>
-               </size>
-              </property>
+           <layout class="QGridLayout" name="gridLayout_7">
+            <item row="0" column="0">
+             <widget class="QGroupBox" name="polosCerosPlot">
               <property name="title">
                <string/>
               </property>
              </widget>
-            </item>
-            <item row="0" column="0">
-             <layout class="QGridLayout" name="gridLayout_7">
-              <item row="6" column="0">
-               <widget class="QLabel" name="label_24">
-                <property name="text">
-                 <string>Tipo de filtro</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="label_17">
-                <property name="text">
-                 <string>Crear Plantilla</string>
-                </property>
-               </widget>
-              </item>
-              <item row="8" column="1">
-               <widget class="QPlainTextEdit" name="ordenBP"/>
-              </item>
-              <item row="7" column="0">
-               <widget class="QLabel" name="label_22">
-                <property name="text">
-                 <string>Rango</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="label_26">
-                <property name="text">
-                 <string>Ap</string>
-                </property>
-               </widget>
-              </item>
-              <item row="8" column="0">
-               <widget class="QLabel" name="label_23">
-                <property name="text">
-                 <string>Orden</string>
-                </property>
-               </widget>
-              </item>
-              <item row="9" column="0" colspan="2">
-               <widget class="QPushButton" name="pushButton_8">
-                <property name="text">
-                 <string>Crear Filtro</string>
-                </property>
-               </widget>
-              </item>
-              <item row="7" column="1">
-               <widget class="QPlainTextEdit" name="rangoBP"/>
-              </item>
-              <item row="1" column="0" colspan="2">
-               <widget class="QStackedWidget" name="stackedWidget">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>200</height>
-                 </size>
-                </property>
-                <property name="currentIndex">
-                 <number>0</number>
-                </property>
-                <widget class="QWidget" name="page">
-                 <layout class="QGridLayout" name="gridLayout_12">
-                  <item row="2" column="1">
-                   <widget class="QPlainTextEdit" name="dFaBP"/>
-                  </item>
-                  <item row="0" column="0">
-                   <widget class="QLabel" name="label_18">
-                    <property name="text">
-                     <string>Fo</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="0">
-                   <widget class="QLabel" name="label_19">
-                    <property name="text">
-                     <string>ΔFp</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="1">
-                   <widget class="QPlainTextEdit" name="f0BP"/>
-                  </item>
-                  <item row="2" column="0">
-                   <widget class="QLabel" name="label_20">
-                    <property name="text">
-                     <string>ΔFa</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="1">
-                   <widget class="QPlainTextEdit" name="dFpBP"/>
-                  </item>
-                 </layout>
-                </widget>
-                <widget class="QWidget" name="page_2">
-                 <layout class="QGridLayout" name="gridLayout_13">
-                  <item row="3" column="0">
-                   <widget class="QLabel" name="label_44">
-                    <property name="text">
-                     <string>Fa+</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="0">
-                   <widget class="QLabel" name="label_45">
-                    <property name="text">
-                     <string>Fp-</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="1">
-                   <widget class="QPlainTextEdit" name="fpYBP"/>
-                  </item>
-                  <item row="1" column="0">
-                   <widget class="QLabel" name="label_46">
-                    <property name="text">
-                     <string>Fp+</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="2" column="0">
-                   <widget class="QLabel" name="label_36">
-                    <property name="text">
-                     <string>Fa-</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="2" column="1">
-                   <widget class="QPlainTextEdit" name="faXBP"/>
-                  </item>
-                  <item row="3" column="1">
-                   <widget class="QPlainTextEdit" name="faYBP"/>
-                  </item>
-                  <item row="0" column="1">
-                   <widget class="QPlainTextEdit" name="fpXBP"/>
-                  </item>
-                 </layout>
-                </widget>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QComboBox" name="comboBox_5">
-                <item>
-                 <property name="text">
-                  <string>Anchos de Banda</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Frecuencias</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item row="3" column="0">
-               <widget class="QLabel" name="label_21">
-                <property name="text">
-                 <string>Aa</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="1">
-               <widget class="QPlainTextEdit" name="apBP"/>
-              </item>
-              <item row="3" column="1">
-               <widget class="QPlainTextEdit" name="aaBP"/>
-              </item>
-              <item row="6" column="1">
-               <widget class="QComboBox" name="comboBox_3">
-                <item>
-                 <property name="text">
-                  <string>Butterworth</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Chebyshev I</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Chebyshev II (inverso)</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Cauer (elíptico)</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item row="4" column="0" rowspan="2" colspan="2">
-               <widget class="QPushButton" name="pushButton_3">
-                <property name="text">
-                 <string>Crear Plantilla</string>
-                </property>
-               </widget>
-              </item>
-             </layout>
-            </item>
-            <item row="0" column="2">
-             <widget class="QListWidget" name="listPlantillaBPWidget"/>
-            </item>
-           </layout>
-          </widget>
-          <widget class="QWidget" name="rechazaBandaTab">
-           <attribute name="title">
-            <string>Rechaza Banda</string>
-           </attribute>
-           <layout class="QGridLayout" name="gridLayout_11">
-            <item row="0" column="0">
-             <layout class="QGridLayout" name="gridLayout_8">
-              <item row="8" column="0" colspan="2">
-               <widget class="QPushButton" name="pushButton_7">
-                <property name="text">
-                 <string>Crear Filtro</string>
-                </property>
-               </widget>
-              </item>
-              <item row="6" column="0">
-               <widget class="QLabel" name="label_30">
-                <property name="text">
-                 <string>Rango</string>
-                </property>
-               </widget>
-              </item>
-              <item row="7" column="0">
-               <widget class="QLabel" name="label_31">
-                <property name="text">
-                 <string>Orden</string>
-                </property>
-               </widget>
-              </item>
-              <item row="5" column="0">
-               <widget class="QLabel" name="label_32">
-                <property name="text">
-                 <string>Tipo de filtro</string>
-                </property>
-               </widget>
-              </item>
-              <item row="5" column="1">
-               <widget class="QComboBox" name="comboBox_4">
-                <item>
-                 <property name="text">
-                  <string>Butterworth</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Chebyshev I</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Chebyshev II (inverso)</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Cauer (elíptico)</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item row="4" column="0" colspan="2">
-               <widget class="QPushButton" name="pushButton_4">
-                <property name="text">
-                 <string>Crear Plantilla</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="0">
-               <widget class="QLabel" name="label_25">
-                <property name="text">
-                 <string>Crear Plantilla</string>
-                </property>
-               </widget>
-              </item>
-              <item row="1" column="0" colspan="2">
-               <widget class="QStackedWidget" name="stackedWidget_3">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>0</height>
-                 </size>
-                </property>
-                <property name="maximumSize">
-                 <size>
-                  <width>16777215</width>
-                  <height>200</height>
-                 </size>
-                </property>
-                <property name="currentIndex">
-                 <number>0</number>
-                </property>
-                <widget class="QWidget" name="page_5">
-                 <layout class="QGridLayout" name="gridLayout_14">
-                  <item row="0" column="0">
-                   <widget class="QLabel" name="label_33">
-                    <property name="text">
-                     <string>Fo</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="0">
-                   <widget class="QLabel" name="label_34">
-                    <property name="text">
-                     <string>ΔFp</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="2" column="0">
-                   <widget class="QLabel" name="label_47">
-                    <property name="text">
-                     <string>ΔFa</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="1">
-                   <widget class="QPlainTextEdit" name="dFpBS"/>
-                  </item>
-                  <item row="0" column="1">
-                   <widget class="QPlainTextEdit" name="f0BS"/>
-                  </item>
-                  <item row="2" column="1">
-                   <widget class="QPlainTextEdit" name="dFaBS"/>
-                  </item>
-                 </layout>
-                </widget>
-                <widget class="QWidget" name="page_6">
-                 <layout class="QGridLayout" name="gridLayout_15">
-                  <item row="3" column="0">
-                   <widget class="QLabel" name="label_48">
-                    <property name="text">
-                     <string>Fa+</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="2" column="0">
-                   <widget class="QLabel" name="label_52">
-                    <property name="text">
-                     <string>Fa-</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="0" column="0">
-                   <widget class="QLabel" name="label_50">
-                    <property name="text">
-                     <string>Fp-</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="1" column="1">
-                   <widget class="QPlainTextEdit" name="fpYBS"/>
-                  </item>
-                  <item row="1" column="0">
-                   <widget class="QLabel" name="label_51">
-                    <property name="text">
-                     <string>Fp+</string>
-                    </property>
-                   </widget>
-                  </item>
-                  <item row="3" column="1">
-                   <widget class="QPlainTextEdit" name="faYBS"/>
-                  </item>
-                  <item row="2" column="1">
-                   <widget class="QPlainTextEdit" name="faXBS"/>
-                  </item>
-                  <item row="0" column="1">
-                   <widget class="QPlainTextEdit" name="fpXBS"/>
-                  </item>
-                 </layout>
-                </widget>
-               </widget>
-              </item>
-              <item row="3" column="0">
-               <widget class="QLabel" name="label_29">
-                <property name="text">
-                 <string>Aa</string>
-                </property>
-               </widget>
-              </item>
-              <item row="0" column="1">
-               <widget class="QComboBox" name="comboBox_6">
-                <item>
-                 <property name="text">
-                  <string>Anchos de Banda</string>
-                 </property>
-                </item>
-                <item>
-                 <property name="text">
-                  <string>Frecuencias</string>
-                 </property>
-                </item>
-               </widget>
-              </item>
-              <item row="6" column="1">
-               <widget class="QPlainTextEdit" name="rangoBS"/>
-              </item>
-              <item row="7" column="1">
-               <widget class="QPlainTextEdit" name="ordenBS"/>
-              </item>
-              <item row="2" column="0">
-               <widget class="QLabel" name="label_28">
-                <property name="text">
-                 <string>Ap</string>
-                </property>
-               </widget>
-              </item>
-              <item row="2" column="1">
-               <widget class="QPlainTextEdit" name="apBS"/>
-              </item>
-              <item row="3" column="1">
-               <widget class="QPlainTextEdit" name="aaBS"/>
-              </item>
-             </layout>
-            </item>
-            <item row="0" column="1">
-             <widget class="QGroupBox" name="rechazaBandaPlot">
-              <property name="minimumSize">
-               <size>
-                <width>500</width>
-                <height>0</height>
-               </size>
-              </property>
-              <property name="title">
-               <string/>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="2">
-             <widget class="QListWidget" name="listPlantillaBSWidget"/>
             </item>
            </layout>
           </widget>
@@ -886,9 +731,6 @@
       </widget>
      </widget>
     </item>
-    <item row="0" column="1">
-     <widget class="QListWidget" name="listFiltrosWidget"/>
-    </item>
    </layout>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -897,12 +739,61 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>949</width>
+     <width>1150</width>
      <height>21</height>
     </rect>
    </property>
   </widget>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>comboBox_7</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>stackedWidget_2</receiver>
+   <slot>setCurrentIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>169</x>
+     <y>79</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>160</x>
+     <y>138</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox_8</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>stackedWidget_4</receiver>
+   <slot>setCurrentIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>130</x>
+     <y>124</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>69</x>
+     <y>138</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>comboBox_9</sender>
+   <signal>currentIndexChanged(int)</signal>
+   <receiver>stackedWidget_5</receiver>
+   <slot>setCurrentIndex(int)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>111</x>
+     <y>117</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>63</x>
+     <y>138</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
