@@ -8,6 +8,7 @@ Epsilon = 1e-5
 
 class FilterClass:
     def __init__(self):
+        self.nombre = None
 
         self.transferFunction = ss.TransferFunction(1,1)    #transferencia final orden minimo
         self.tfLP = ss.TransferFunction(1,1)               #transferencia del pasabajos orden minimo
@@ -31,6 +32,9 @@ class FilterClass:
 
         self.currentN = 1            #nuevo N
         self.Wan = 2              # nuevo Wan
+
+    def crearNombre(self, nombre):
+        self.nombre = nombre
 
     '''
         Low Pass

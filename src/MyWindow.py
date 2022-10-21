@@ -1,5 +1,6 @@
 # PyQt5 modules
-from PyQt5.QtWidgets import QMainWindow
+from PyQt5.QtWidgets import QMainWindow, QInputDialog, QListWidgetItem
+from PyQt5.QtCore import Qt
 
 # Project modules
 from src.ui.mainwindow import Ui_MainWindow
@@ -7,6 +8,8 @@ from src.Filters2 import FilterClass
 import scipy.signal as ss
 import matplotlib.pyplot as plt
 import numpy as np
+from src.plottingClasses import BodePlot
+from src.PlantillaClass import PlantillaClass
 
 class MainWindow(QMainWindow, Ui_MainWindow):
 
@@ -15,112 +18,199 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
 
         self.listaFiltros = []
+        self.listaPlantillas = []
 
-        tipo = "BS" # ....fp-...........f0.............fp+.......
-        f0 = 16e3
-        dP = 10e3
-        dA = 600
-        Fp = [11e3, 21e3]
-        Fa = [15.7e3, 16.3e3]
-        Ap = 6
-        Aa = 55
-        f = FilterClass()
-        tF = f.getBSTransferFunctionBW(f0, dP, dA, Ap, Aa, "cheby2", 0)
+        # Configuración gráfica
+
+        # Gráficos de atenuación
+        self.atenMagPlot = BodePlot(parent = self.atenMagPlotBox)
+        self.atenMagPlotBox.layout().addWidget(self.atenMagPlot.navToolBar)
+        self.atenMagPlotBox.layout().addWidget(self.atenMagPlot) #importante setear tamaños mínimos desde QTDesigner, sino no anda
+
+        self.atenFasePlot = BodePlot(parent=self.atenFasePlotBox)
+        self.atenFasePlotBox.layout().addWidget(self.atenFasePlot.navToolBar)
+        self.atenFasePlotBox.layout().addWidget(self.atenFasePlot)
+
+        # Gráficos de ganancia
+        self.ganMagPlot = BodePlot(parent = self.ganMagPlotBox)
+        self.ganMagPlotBox.layout().addWidget(self.ganMagPlot.navToolBar)
+        self.ganMagPlotBox.layout().addWidget(self.ganMagPlot)
+
+        self.ganFasePlot = BodePlot(parent=self.ganFasePlotBox)
+        self.ganFasePlotBox.layout().addWidget(self.ganFasePlot.navToolBar)
+        self.ganFasePlotBox.layout().addWidget(self.ganFasePlot)
+
+        # Gráficos de polos y ceros
+
+        # Configuración de las pestañas y clicks
+        self.crearPlantillaButton.clicked.connect(self.crearPlantilla)
+        self.crearFiltroButton.clicked.connect(self.crearFiltro)
 
 
-        if tipo == "LP":
-            w = np.logspace(np.log10(Fp *2*np.pi / 10), np.log10(Fa *2*np.pi* 10), 1000)
-            w, m, p = ss.bode(tF, w, n=1000)
-            plt.semilogx(w / (2 * np.pi), m)
+        self.borrarFiltrosButton.clicked.connect(self.deleteFiltros)
+        self.borrarTodosFiltrosButton.clicked.connect(self.deleteAllFiltros)
+        self.borrarPlantillasButton.clicked.connect(self.deletePlantillas)
+        self.borrarTodasPlantillasButton.clicked.connect(self.deleteAllPlantillas)
 
-            plt.fill([Fp/10, Fp, Fp, Fp/10], [0, 0, -Ap, -Ap], '0.9', lw=0)
-            plt.fill([Fa, Fa*10, Fa*10, Fa], [-Aa, -Aa, -Aa -10, -Aa -10], '0.9', lw=0)
 
-        elif tipo == "HP":
-            w = np.logspace(np.log10(Fa * 2 * np.pi / 10), np.log10(Fp * 2 * np.pi * 10), 1000)
-            w, m, p = ss.bode(tF, w, n=1000)
-            plt.semilogx(w / (2 * np.pi), m)
+    def crearPlantilla(self):
+        newPlantilla = PlantillaClass()
 
-            plt.fill([Fp, Fp*10, Fp*10, Fp], [0, 0, -Ap, -Ap], '0.9', lw=0)
-            plt.fill([Fa/10, Fa, Fa, Fa/10], [-Aa, -Aa, -Aa*2, -Aa*2], '0.9', lw=0)
+        text = self.tipoFiltroComboBox.currentText()
 
-        elif tipo == "BP":
-            w = np.logspace(np.log10(Fa[0] * 2 * np.pi / 10), np.log10(Fa[1] * 2 * np.pi*2), 1000)
-            w, m, p = ss.bode(tF, w, n=1000)
-            plt.semilogx(w / (2 * np.pi), m)
+        if text == "Pasa Bajos":
+            fp = float(self.fpLP.toPlainText())
+            fa = float(self.faLP.toPlainText())
+            ap= float(self.apVal.toPlainText())
+            aa = float(self.aaVal.toPlainText())
 
-            plt.fill([Fp[0], Fp[1], Fp[1], Fp[0]], [0, 0, -Ap, -Ap], '0.9', lw=0)
-            plt.fill([Fa[0]/10, Fa[0], Fa[0], Fa[0]/10], [-Aa, -Aa, -Aa*2, -Aa*2], '0.9', lw=0)
-            plt.fill([Fa[1], Fa[1]*2, Fa[1]*2, Fa[1]], [-Aa, -Aa, -Aa * 2, -Aa * 2], '0.9', lw=0)
 
-        elif tipo == "BS":
-            w = np.logspace(np.log10(Fa[0] * 2 * np.pi / 10), np.log10(Fa[1] * 2 * np.pi * 10), 1000)
-            w, m, p = ss.bode(tF, w, n=1000)
-            plt.semilogx(w / (2 * np.pi), m)
+            newPlantilla.crearPasaBajos(fp, fa, ap, aa)
 
-            plt.fill([Fa[0], Fa[1], Fa[1], Fa[0]], [-Aa, -Aa, -Aa-10, -Aa-10], '0.9', lw=0)
-            plt.fill([Fp[0]/10, Fp[0], Fp[0], Fp[0]/10], [0, 0, -Ap, -Ap], '0.9', lw=0)
-            plt.fill([Fp[1], Fp[1]*10, Fp[1]*10, Fp[1]], [0, 0, -Ap, -Ap], '0.9', lw=0)
+        elif text == "Pasa Altos":
+            fp = float(self.fpHP.toPlainText())
+            fa = float(self.faHP.toPlainText())
+            ap = float(self.apVal.toPlainText())
+            aa = float(self.aaVal.toPlainText())
 
-        tipo = "BS"  # ....fp-...........f0.............fp+.......
-        f0 = 16e3
-        dP = 10e3
-        dA = 600
-        Fp = [11e3, 21e3]
-        Fa = [15.7e3, 16.3e3]
-        Ap = 6
-        Aa = 50
-        f = FilterClass()
-        tF = f.getBSTransferFunctionBW(f0, dP, dA, Ap, Aa, "cheby2", 0)
+            newPlantilla.crearPasaAltos(fp, fa, ap, aa)
 
-        w = np.logspace(np.log10(Fa[0] * 2 * np.pi / 10), np.log10(Fa[1] * 2 * np.pi * 10), 1000)
-        w, m, p = ss.bode(tF, w, n=1000)
-        plt.semilogx(w / (2 * np.pi), m)
+        elif text == "Pasa Banda":
+            tipo = self.BPTypeComboBox.currentText()
+            if tipo == "Anchos de Banda":
+                dfp = float(self.dFpBP.toPlainText())
+                dfa = float(self.dFaBP.toPlainText())
+                ap = float(self.apVal.toPlainText())
+                aa = float(self.aaVal.toPlainText())
 
-        plt.fill([Fa[0], Fa[1], Fa[1], Fa[0]], [-Aa, -Aa, -Aa-10, -Aa-10], '0.9', lw=0)
-        plt.fill([Fp[0]/10, Fp[0], Fp[0], Fp[0]/10], [0, 0, -Ap, -Ap], '0.9', lw=0)
-        plt.fill([Fp[1], Fp[1]*10, Fp[1]*10, Fp[1]], [0, 0, -Ap, -Ap], '0.9', lw=0)
+                newPlantilla.crearPasaBandaBW(dfp, dfa, ap, aa)
 
-        plt.show()
+            elif tipo == "Frecuencias":
+                fo = float(self.f0BP.toPlainText())
+                fpx = float(self.fpXBP.toPlainText())
+                fpy = float(self.fpYBP.toPlainText())
+                fax = float(self.faXBP.toPlainText())
+                fay = float(self.faYBP.toPlainText())
+                ap = float(self.apVal.toPlainText())
+                aa = float(self.aaVal.toPlainText())
 
-        N = f.n +1
-        tF = f.changeFilterOrder(N)
+                newPlantilla.crearPasaBandaFreq(fo, fpx, fpy, fax, fay, ap, aa)
 
-        if tipo == "LP":
-            w = np.logspace(np.log10(Fp * 2 * np.pi / 10), np.log10(Fa * 2 * np.pi * 10), 1000)
-            w, m, p = ss.bode(tF, w, n=1000)
-            plt.semilogx(w / (2 * np.pi), m)
+        elif text == "Rechaza Banda":
+            tipo = self.BSTypeComboBox.currentText()
+            if tipo == "Anchos de Banda":
+                dfp = float(self.dFpBP.toPlainText())
+                dfa = float(self.dFaBP.toPlainText())
+                ap = float(self.apVal.toPlainText())
+                aa = float(self.aaVal.toPlainText())
 
-            plt.fill([Fp / 10, Fp, Fp, Fp / 10], [0, 0, -Ap, -Ap], '0.9', lw=0)
-            plt.fill([Fa, Fa * 10, Fa * 10, Fa], [-Aa, -Aa, -Aa - 10, -Aa - 10], '0.9', lw=0)
+                newPlantilla.crearRechazaBandaBW(dfp, dfa, ap, aa)
 
-        elif tipo == "HP":
-            w = np.logspace(np.log10(Fa * 2 * np.pi / 10), np.log10(Fp * 2 * np.pi * 10), 1000)
-            w, m, p = ss.bode(tF, w, n=1000)
-            plt.semilogx(w / (2 * np.pi), m)
+            elif tipo == "Frecuencias":
+                fo = float(self.f0BS.toPlainText())
+                fpx = float(self.fpXBS.toPlainText())
+                fpy = float(self.fpYBS.toPlainText())
+                fax = float(self.faXBS.toPlainText())
+                fay = float(self.faYBS.toPlainText())
+                ap = float(self.apVal.toPlainText())
+                aa = float(self.aaVal.toPlainText())
 
-            plt.fill([Fp, Fp * 10, Fp * 10, Fp], [0, 0, -Ap, -Ap], '0.9', lw=0)
-            plt.fill([Fa / 10, Fa, Fa, Fa / 10], [-Aa, -Aa, -Aa * 2, -Aa * 2], '0.9', lw=0)
+                newPlantilla.crearRechazaBandaFreq(fo, fpx, fpy, fax, fay, ap, aa)
 
-        elif tipo == "BP":
-            w = np.logspace(np.log10(Fa[0] * 2 * np.pi / 10), np.log10(Fa[1] * 2 * np.pi * 2), 1000)
-            w, m, p = ss.bode(tF, w, n=1000)
-            plt.semilogx(w / (2 * np.pi), m)
 
-            plt.fill([Fp[0], Fp[1], Fp[1], Fp[0]], [0, 0, -Ap, -Ap], '0.9', lw=0)
-            plt.fill([Fa[0] / 10, Fa[0], Fa[0], Fa[0] / 10], [-Aa, -Aa, -Aa * 2, -Aa * 2], '0.9', lw=0)
-            plt.fill([Fa[1], Fa[1] * 2, Fa[1] * 2, Fa[1]], [-Aa, -Aa, -Aa * 2, -Aa * 2], '0.9', lw=0)
+        plantillaName, ok = QInputDialog.getText(self, "Agregar Plantilla", 'Nombre la plantilla: ')
+        if not ok:
+            return
+        if len(plantillaName) < 1:
+            plantillaName = "Plantilla " + str(len(self.listaPlantillas))
 
-        elif tipo == "BS":
-            w = np.logspace(np.log10(Fa[0] * 2 * np.pi / 10), np.log10(Fa[1] * 2 * np.pi * 10), 1000)
-            w, m, p = ss.bode(tF, w, n=1000)
-            plt.semilogx(w / (2 * np.pi), m)
+        newPlantilla.crearNombre(plantillaName)
 
-            plt.fill([Fa[0], Fa[1], Fa[1], Fa[0]], [-Aa, -Aa, -Aa - 10, -Aa - 10], '0.9', lw=0)
-            plt.fill([Fp[0] / 10, Fp[0], Fp[0], Fp[0] / 10], [0, 0, -Ap, -Ap], '0.9', lw=0)
-            plt.fill([Fp[1], Fp[1] * 10, Fp[1] * 10, Fp[1]], [0, 0, -Ap, -Ap], '0.9', lw=0)
+        self.listaPlantillas.append(newPlantilla)
 
-        plt.show()
+        item = QListWidgetItem(plantillaName)
+        item.setCheckState(Qt.Checked)
+
+        self.listPlantillasWidget.addItem(item)
+
+    def crearFiltro(self):
+        text = self.tipoAproxComboBox.currentText()
+
+        if text == "Butterworth":
+            text = "butter"
+        elif text == "Chebyshev I":
+            text = "cheby1"
+        elif text == "Chebyshev II (inverso)":
+            text = "cheby2"
+        elif text == "Cauer (elíptico)":
+            text = "ellip"
+
+        for i in range(len(self.listaPlantillas)):
+            if self.listPlantillasWidget.item(i).checkState() == 2:
+                filtroActual = FilterClass()
+                p = self.listaPlantillas[i]
+
+                if p.tipoPlantilla == "LP":
+                    filtroActual.getLPTransferFunction(p.fp, p.fa, p.ap, p.aa, text, 0)
+
+                elif p.tipoPlantilla == "HP":
+                    filtroActual.getHPTransferFunction(p.fp, p.fa, p.ap, p.aa, text, 0)
+
+                elif p.tipoPlantilla == "BPF":
+                    filtroActual.getBPTransferFunctionFreq([p.fpx,p.fpy], [p.fax, p.fay], p.ap, p.aa, text, 0)
+
+                elif p.tipoPlantilla == "BPBW":
+                    filtroActual.getBPTransferFunctionBW(p.f0, p.dfp, p.dfa, p.ap, p.aa, text, 0)
+
+                elif p.tipoPlantilla == "BSF":
+                    filtroActual.getBSTransferFunctionFreq([p.fpx, p.fpy], [p.fax, p.fay], p.ap, p.aa, text, 0)
+
+                elif p.tipoPlantilla == "BSBW":
+                    filtroActual.getBSTransferFunctionBW(p.f0, p.dfp, p.dfa, p.ap, p.aa, text, 0)
+
+
+
+                filtroName, ok = QInputDialog.getText(self, "Agregar Filtro", 'Nombre del filtro: ')
+                if not ok:
+                    return
+                if len(filtroName) < 1:
+                    filtroName = "Filtro " + str(len(self.listaFiltros))
+
+                filtroActual.crearNombre(filtroName)
+
+                self.listaFiltros.append(filtroActual)
+
+                item = QListWidgetItem(filtroName)
+                item.setCheckState(Qt.Checked)
+
+                self.listFiltrosWidget.addItem(item)
+
+    def deletePlantillas(self):
+        numberOfFunctions = len(self.listaPlantillas)
+        for i in range(numberOfFunctions):
+            if self.listPlantillasWidget.item(numberOfFunctions-1-i).checkState() == 2:
+                self.listPlantillasWidget.takeItem(numberOfFunctions-1-i)
+                self.listaPlantillas.pop(numberOfFunctions-1-i)
+
+    def deleteAllPlantillas(self):
+        numberOfFunctions = len(self.listaPlantillas)
+        for i in range(numberOfFunctions):
+            self.listPlantillasWidget.takeItem(numberOfFunctions - 1 - i)
+            self.listaPlantillas.pop(numberOfFunctions - 1 - i)
+
+    def deleteFiltros(self):
+        numberOfFunctions = len(self.listaFiltros)
+        for i in range(numberOfFunctions):
+            if self.listFiltrosWidget.item(numberOfFunctions-1-i).checkState() == 2:
+                self.listFiltrosWidget.takeItem(numberOfFunctions-1-i)
+                self.listaFiltros.pop(numberOfFunctions-1-i)
+
+    def deleteAllFiltros(self):
+        numberOfFunctions = len(self.listaFiltros)
+        for i in range(numberOfFunctions):
+            self.listFiltrosWidget.takeItem(numberOfFunctions - 1 - i)
+            self.listaFiltros.pop(numberOfFunctions - 1 - i)
+
 
 
 
